@@ -2,8 +2,18 @@
 
 class Home extends Controller
 {
-    public function index()
+    public function index($name = 'Alex')
     {
-        echo 'home/index';
+        $user = $this->model('User');
+
+        $user->name = $name;
+
+        $food = array('Apple', 'Banana', 'Rye Bread');
+
+        $this->view('home/index', array(
+            'name' => $user->name,
+            'food' => $food
+        ));
     }
+
 }
