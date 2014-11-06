@@ -2,18 +2,22 @@
 
 class Home extends Controller
 {
-    public function index($name = 'Alex')
+    public function index($user = null)
     {
-        $user = $this->model('User');
+        $userModel = $this->model('User');
 
-        $user->name = $name;
 
-        $food = array('Apple', 'Banana', 'Rye Bread');
+        if($user){
+            $user = $userModel->get($user);
+        }
 
+        //var_dump($user);
+
+        $this->view('templates/header');
         $this->view('home/index', array(
-            'name' => $user->name,
-            'food' => $food
+            'user' => $user
         ));
+        $this->view('templates/footer');
     }
 
 }
